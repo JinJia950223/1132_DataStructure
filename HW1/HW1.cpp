@@ -20,7 +20,7 @@ void initializePlayer(Player* player, string name) {
     int card2 = drawCard();
     player->score = card1 + card2;
     
-    // 如果兩張牌總和是 10，且有 A，則 A 當作 11
+    // 如果分數是10且抽到A，則加10分，否則加1分 
     if ((card1 == 1 || card2 == 1) && player->score == 10) {
         player->score = 11 + (card1 == 1 ? card2 : card1);
     }
@@ -48,7 +48,7 @@ void playerTurn(Player* player) {
                 return;
             }
         }
-        else if (choice == 's') { // 不要抽牌則退出 
+        else if (choice == 's') { //不要抽牌則退出 
             break;
         }
     }
@@ -91,10 +91,10 @@ int main() {
     initializePlayer(&player, "玩家"); // 初始化莊家、玩家 
     initializePlayer(&dealer, "莊家");
 
-    displayScore(&player);
-    playerTurn(&player);
+    displayScore(&player); //顯示分數 
+    playerTurn(&player); //玩家回合 
 
-    if (player.score <= 21) { 
+    if (player.score <= 21) { //如果玩家小於21點，輪到莊家 
         cout << "\n莊家回合...\n";
         displayScore(&dealer);
         dealerTurn(&dealer);
